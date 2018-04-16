@@ -1,0 +1,15 @@
+<div class="user-header text-center">
+  <h1 class="title-medium">
+    <%= @user.name %>
+  </h1>
+
+  <div class="user-image-div">
+    <%= image_tag user_avatar(@user), class: 'user-image', alt: '[Фото]' %>
+  </div>
+
+  <h2 class="title-small buffer-both">
+    @<%= @user.login %>
+  </h2>
+
+
+</div>
