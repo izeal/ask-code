@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
+
   def new
     @user = User.new
   end
@@ -7,7 +9,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "Вы успешно зарегистрировались"
-      redirect_to users_path
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
     else
       flash[:danger] = "Корректно заполните все поля"
       render 'new'
@@ -15,7 +18,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def index
@@ -23,29 +25,32 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       redirect_to user_path(@user), notice: "Данные успешно обновлены"
     else
-      flash[:danger] = "Мы не смогли обновить ваш профиль по следующим причинам:"
+      flash.now[:danger] = "Мы не смогли обновить ваш профиль по следующим причинам:"
       render 'edit'
     end
   end
 
   def destroy
-    @user = User.find(params[:id]).destroy
+    @user.destroy
     flash[:success] = "Пользователь успешно удален"
     redirect_to users_path
   end
 
   private
+
   def user_params
     params.require(:user).permit(
       :name, :login, :email, :password, :password_confirmation
     )
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

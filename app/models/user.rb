@@ -40,7 +40,7 @@ class User < ApplicationRecord
     password_hash.unpack('H*')[0]
   end
 
-    def self.hash_to_string(password_hash)
+  def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
   end
 

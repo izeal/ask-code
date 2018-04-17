@@ -16,4 +16,8 @@ module ApplicationHelper
     return "#{prefix} #{krokodila}" if devision_amount.between?(2,4)
     return "#{prefix} #{krokodilov}" if devision_amount.between?(5,9) || devision_amount.zero?
   end
+
+  def current_user
+    current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
 end
