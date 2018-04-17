@@ -14,12 +14,22 @@
   <div class="container">
     <div class="header-logo">
       <h1 class="header-title"><%= link_to "AskCode", root_path %></h1>
+       <h1 class="header-title"><%= link_to "Sign up!", new_user_path %>
     </div>
   </div>
 </div>
 
 <div class="content">
   <div class="container">
+
+    <% if flash.any? %>
+      <div class="content-wrapper buffer-both">
+        <% flash.each do |name, message| %>
+          <%= content_tag :div, message, class: "flash-#{name}" %>
+        <% end %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </div>
 </div>
