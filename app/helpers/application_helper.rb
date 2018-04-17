@@ -1,6 +1,10 @@
 module ApplicationHelper
+  # добавить поле при регистрации чтоб указать урл аватарки
+  # если оно пустое то устанавить его в рандом
+  # и в настройках тоде самое с апдейт
+  # todo
   def user_avatar(user)
-    user.avatar_url ? user.avatar_url : (asset_path "avatar#{rand(1..5)}.jpg")
+    user.avatar_url ||= (asset_path "avatar#{rand(1..5)}.jpg")
   end
 
   def decline(number, krokodil, krokodila, krokodilov, with_number = false)
@@ -20,4 +24,8 @@ module ApplicationHelper
   def current_user
     current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
+
+  # todo
+  # сделать хелпер который перед удалением акк запрашивает
+  # решить примерчик и ввести результат в поле
 end

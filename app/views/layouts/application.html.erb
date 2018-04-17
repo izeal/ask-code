@@ -19,7 +19,7 @@
 
     <div class="header-nav">
       <% if current_user %>
-        <%= link_to "@#{current_user.login}", user_path(current_user) %> | <%= link_to "Настройки", edit_user_path(session[:user_id]) %> | <%= link_to 'Выйти', logout_path, method: :delete %>
+        <%= link_to "#{current_user.login}", user_path(current_user) %> | <%= link_to "Настройки", edit_user_path(session[:user_id]) %> | <%= link_to 'Выйти', logout_path, method: :delete %>
       <% else %>
         <%= link_to 'Sign up!', signup_path,
           class: 'button button-light button-small' %>

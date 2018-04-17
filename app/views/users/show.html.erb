@@ -8,8 +8,33 @@
   </div>
 
   <h2 class="title-small buffer-both">
-    @<%= @user.login %>
+    <%= @user.login %>
   </h2>
+</div>
 
+<div class="user-question-form-div column-1-4 column-1-4-right" id='ask-form'>
+  <div class="user-question-form buffer-both">
+    <%= form_for @post do |f| %>
+      <%= f.hidden_field :user_id %>
 
+      <div class="form-field">
+        <%= f.label "Ваш вопрос для #{@user.login}", class: 'form-label' %>
+        <%= f.text_area :text, class: 'form-textarea' %>
+      </div>
+
+      <div class="form-action">
+        <%= submit_tag 'Запостить', class: 'button button-small button-dark' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="column-3-4">
+  <div class="user-questions buffer-both">
+    <div class="questions-list">
+      <% @user.posts.each do |post| %>
+        <%= render partial: 'posts/post', object: post %>
+      <% end %>
+    </div>
+  </div>
 </div>

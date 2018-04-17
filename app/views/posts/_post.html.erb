@@ -1,0 +1,17 @@
+<div class="question">
+  <div class="question-content">
+
+    <div class="question-text text-lead">
+      <%= post.text %>
+    </div>
+
+    <div class="question-answer text-lead">
+      <%#= post.comment if post.comment %>
+    </div>
+
+    <div class="question-date">
+      <%= link_to 'Удалить', post_path, method: :delete %>
+      <%#= l(post.created_at, format: :short) %>
+    </div>
+  </div>
+</div>

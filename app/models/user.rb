@@ -10,6 +10,8 @@ class User < ApplicationRecord
   before_save { login.downcase! } # todo
   before_save { email.downcase! } # todo
 
+  has_many :posts
+
   validates :name, presence: true
   validates :login,
             presence: true,
@@ -22,8 +24,9 @@ class User < ApplicationRecord
             uniqueness: {case_sensitive: false },
             format: { with: VALID_EMAIL_REGEX }
 
-  # on create???
-  validates :password, presence: true, on: :create, confirmation: true
+  # on: :create???
+  validates :password, presence: true, confirmation: true,
+            length: { in: 6..15 }
 
   attr_accessor :password
 
