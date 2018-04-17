@@ -23,14 +23,16 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.new
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       redirect_to user_path(@user), notice: "Данные успешно обновлены"
     else
-      render edit_user(@user), notice: "Мы не смогли обновить ваш профиль по следующим причинам:"
+      flash[:danger] = "Мы не смогли обновить ваш профиль по следующим причинам:"
+      render 'edit'
     end
   end
 
