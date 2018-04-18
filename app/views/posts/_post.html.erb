@@ -1,4 +1,4 @@
-<div class="question">
+ <div class="question">
   <div class="question-content">
 
     <div class="question-text text-lead">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="question-date">
-      <%= link_to 'Удалить', post_path, method: :delete %>
+      <%= link_to 'Удалить', posts_path+"/#{post.id}", method: :delete %>
       <%#= l(post.created_at, format: :short) %>
     </div>
   </div>

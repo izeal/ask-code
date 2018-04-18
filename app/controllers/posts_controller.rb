@@ -28,15 +28,16 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    # user = @post.user
-    @post.desrtoy
+    @post = Post.find_by(id: params[:id])
+    @user = @post.user
+    @post.destroy
     flash[:success] = "Пост удален"
-    redirect_to user_path(user)
+    redirect_to user_path(@user)
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:text, :user_id)
+    params.require(:post).permit(:user_id, :text)
   end
 end

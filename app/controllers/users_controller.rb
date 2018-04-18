@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @posts = @user.posts.order(created_at: :desc)
     @post = @user.posts.build
+    # @posts = @user.posts.order(created_at: :desc)
   end
 
   def index
