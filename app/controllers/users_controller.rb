@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
   def show
     @post = @user.posts.build
-    # @posts = @user.posts.order(created_at: :desc)
   end
 
   def index
