@@ -8,21 +8,23 @@
     <div class="question-answer text-lead">
     </div>
 
-    <%= form_for post, method: :patch do |f| %>
+    <div class="user-question-form-div id='ask-form'>
+      <%= form_for post, method: :patch do |f| %>
 
-      <div class="form-field">
-        <%= f.text_field :text, class: 'form-text-field' %>
-      </div>
+        <div class="form-field">
+          <%= f.text_field :text, class: 'form-text-field' %>
+        </div>
 
-      <div class="form-action">
-        <%= f.submit 'Изменить', class: 'button button-small button-dark' %>
-      </div>
-    <% end %>
+        <div class="form-action">
+          <%= f.submit 'Изменить', class: 'button button-small button-dark' %>
+        </div>
+      <% end %>
+    </div>
 
     <div class="question-date">
       <%= post.created_at.strftime("%d-%m-%Y %H:%M:%S") %>
       by <%= post.user.name %>
-      <%= link_to 'Править', post_path(post), method: :post %>
+      <%= link_to "Править", '', id: 'ask-button' %>
       <%= link_to 'Удалить', post_path(post), method: :delete, data: {confirm: 'Вы уверены?'}  %>
     </div>
 

@@ -16,7 +16,7 @@
 
 $(function(){
   $('#ask-button').click(function(){
-    $('#edit-form').slideToggle(300);
+    $('#ask-form').slideToggle();
     return false;
   });
 });
