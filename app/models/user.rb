@@ -24,9 +24,9 @@ class User < ApplicationRecord
             uniqueness: {case_sensitive: false },
             format: { with: VALID_EMAIL_REGEX }
 
-  # on: :create???
+  # on: :create
   validates :password, presence: true, confirmation: true,
-            length: { in: 6..15 }
+            on: :create, length: { in: 6..15 }
 
   attr_accessor :password
 

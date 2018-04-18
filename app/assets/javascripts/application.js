@@ -20,3 +20,10 @@ $(function(){
     return false;
   });
 });
+
+$(function(){
+  $('#edit-button').click(function(){
+    $('#edit-form').slideToggle();
+    return false;
+  });
+});

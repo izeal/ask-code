@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   def edit
   end
 
+  # todo требует заполнения всх полей чтоб обновить
   def update
     if @user.update(user_params)
       redirect_to user_path(@user), notice: "Данные успешно обновлены"
@@ -52,6 +53,6 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
   end
 end
