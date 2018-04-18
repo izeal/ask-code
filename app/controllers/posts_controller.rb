@@ -25,6 +25,14 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find_by(id: params[:id])
+    if @post.update_attributes(text: params[:post][:text])
+      flash[:success] = "Пост обновлен"
+    else
+      flash[:danger] = "Текст поста не может превышать
+                        255 символов либо быть пустым"
+    end
+      redirect_to user_path(@post.user)
   end
 
   def destroy
