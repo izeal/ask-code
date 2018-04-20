@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.order("RANDOM()").limit(15)
   end
 
   def edit
