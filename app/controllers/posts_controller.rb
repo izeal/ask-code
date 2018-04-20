@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
-  def new
-    @post = @user.post.build
-  end
+  before_action :find_post, only: [:edit, :update, :destroy]
+  before_action :check_user, except: [:create]
 
   def create
     @user = User.find_by(id: params[:post][:user_id])
@@ -15,18 +14,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-  end
-
-  def index
-  end
-
   def edit
   end
 
   def update
-    @post = Post.find_by(id: params[:id])
-    if @post.update_attributes(text: params[:post][:text])
+    if @post.update(text: params[:post][:text])
       flash[:success] = "Пост обновлен"
     else
       flash[:danger] = "Текст поста не может превышать
@@ -36,7 +28,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:id])
     @user = @post.user
     @post.destroy
     flash[:success] = "Пост удален"
@@ -47,5 +38,13 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:user_id, :text)
+  end
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
+  def check_user
+    reject_user unless current_user == @post.user
   end
 end

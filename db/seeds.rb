@@ -6,21 +6,33 @@ User.create(
     avatar_url: 'https://avatars3.githubusercontent.com/u/31633474?s=460&v=4'
 )
 
-10.times do |n|
+100.times do |n|
   name = Faker::Name.name
   login = Faker::LordOfTheRings.character.gsub(" ", "_")
   avatar_url = Faker::Avatar.image
   User.create(
     name: name,
-    login: login,
+    login: "#{login}_#{n}",
     avatar_url: avatar_url,
-    email: "#{login}@bar.baz",
+    email: "#{login}#{n}@bar.baz",
+    password: 'foobar'
+  )
+end
+
+100.times do |n|
+  name = Faker::Name.name
+  login = Faker::HarryPotter.character.gsub(" ", "_")
+  avatar_url = Faker::Avatar.image
+  User.create(
+    name: name,
+    login: "#{login}_#{n}",
+    avatar_url: avatar_url,
+    email: "#{login}#{n}@bar.baz",
     password: 'foobar'
   )
 end
 
 users = User.all
-5.times do
-  content = Faker::Lorem.sentence(5)
-  users.each { |user| user.posts.create!(text: content) }
+users.each do |user|
+  rand(5).times { user.posts.create!(text: Faker::HeyArnold.quote) }
 end

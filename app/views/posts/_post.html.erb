@@ -5,29 +5,24 @@
       <%= post.text %>
     </div>
 
-    <div class="question-answer text-lead">
-    </div>
-
-    <div class="user-question-form-div" id='edit-form'>
-      <%= form_for post, method: :patch do |f| %>
-
-        <div class="form-field">
-          <%= f.text_field :text, class: 'form-text-field' %>
-        </div>
-
-        <div class="form-action">
-          <%= f.submit 'Изменить', class: 'button button-small button-dark' %>
-        </div>
-      <% end %>
-    </div>
+    <% if post.answer %>
+      <div class="question-answer text-lead">
+        <%= post.answer %>
+      </div>
+    <% end %>
 
     <div class="question-date">
       <%= post.created_at.strftime("%d-%m-%Y %H:%M:%S") %>
       by <%= post.user.name %>
-      <%= link_to "Править", '', id: 'edit-button' %>
-      <%= link_to 'Удалить', post_path(post), method: :delete, data: {confirm: 'Вы уверены?'}  %>
-    </div>
+      <% edit_icon = post.answer ? 'reply' : 'pencil' %>
+      <% if post.user == current_user %>
 
+        <!-- сделать чтоб этот гребаный ксс в одну строчку был справа от даты проститутка -->
+        <%= link_to fa_icon(edit_icon), edit_post_path(post) %>
+        <%= link_to fa_icon('trash-o'), post_path(post),
+                    method: :delete, data: {confirm: 'Точно удалить вопрос?'} %>
+      <% end %>
+    </div>
 
   </div>
 </div>
