@@ -38,5 +38,5 @@ end
 
 users = User.all
 users.each do |user|
-  rand(5).times { user.posts.create!(text: Faker::HeyArnold.quote) }
+  rand(5).times { user.posts.create(text: Faker::HeyArnold.quote) }
 end
