@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(text: params[:post][:text])
+    if @post.update(post_params)
       flash[:success] = "Пост обновлен"
     else
       flash[:danger] = "Текст поста не может превышать
@@ -37,7 +37,11 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :text)
+    if current_user && params[:post][:user_id].to_i == current_user.id
+      params.require(:post).permit(:user_id, :text, :answer)
+    else
+      params.require(:post).permit(:user_id, :text)
+    end
   end
 
   def find_post

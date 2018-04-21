@@ -14,8 +14,8 @@
     <div class="question-date">
       <%= post.created_at.strftime("%d-%m-%Y %H:%M:%S") %>
       by <%= post.user.name %>
-      <% edit_icon = post.answer ? 'reply' : 'pencil' %>
       <% if post.user == current_user %>
+        <% edit_icon = post.answer ? 'pencil' : 'reply' %>
 
         <!-- сделать чтоб этот гребаный ксс в одну строчку был справа от даты проститутка -->
         <%= link_to fa_icon(edit_icon), edit_post_path(post) %>

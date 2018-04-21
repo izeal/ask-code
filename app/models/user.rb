@@ -4,7 +4,8 @@ class User < ApplicationRecord
   ITERATIONS = 20000
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_EMAIL_REGEX = /\A[\w+\d*\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  VALID_USERNAME_REGEX = /\A\w+\d*\z/
+  VALID_LOGIN_REGEX = /\A\w+\d*\z/
+  VALID_AVATAR_URL_REGEX = /\Ahttp(s)?:\/\/.*\z/
 
   has_many :posts, dependent: :destroy
 
@@ -13,7 +14,7 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false },
             length: { maximum: 40 },
-            format: { with: VALID_USERNAME_REGEX }
+            format: { with: VALID_LOGIN_REGEX }
 
   validates :email,
             presence: true,
@@ -22,6 +23,8 @@ class User < ApplicationRecord
 
   validates :password, presence: true, confirmation: true,
             on: :create, length: { in: 6..15 }
+
+  validates :avatar_url, format: { with: VALID_AVATAR_URL_REGEX }
 
   before_validation :encrypt_password
   before_validation { login.downcase! } # todo
