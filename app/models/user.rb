@@ -24,7 +24,7 @@ class User < ApplicationRecord
   validates :password, presence: true, confirmation: true,
             on: :create, length: { in: 6..15 }
 
-  validates :avatar_url, format: { with: VALID_AVATAR_URL_REGEX }
+  validates :avatar_url, on: :update, format: { with: VALID_AVATAR_URL_REGEX }
 
   before_validation :encrypt_password
   before_validation { login.downcase! } # todo

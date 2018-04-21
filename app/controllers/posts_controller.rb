@@ -38,9 +38,9 @@ class PostsController < ApplicationController
 
   def post_params
     if current_user && params[:post][:user_id].to_i == current_user.id
-      params.require(:post).permit(:user_id, :text, :answer)
+      params.require(:post).permit(:user_id, :text, :answer, :author_id)
     else
-      params.require(:post).permit(:user_id, :text)
+      params.require(:post).permit(:user_id, :text, :author_id)
     end
   end
 

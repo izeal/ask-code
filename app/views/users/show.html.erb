@@ -37,7 +37,9 @@
   <div class="user-question-form buffer-both">
     <%= form_for @post do |f| %>
       <%= f.hidden_field :user_id %>
-
+      <% if current_user %>
+        <%= f.hidden_field :author_id, value: current_user.id.to_i %>
+      <% end %>
       <div class="form-field">
         <%= f.label "Ваш вопрос для @#{@user.login}", class: 'form-label' %>
         <%= f.text_area :text, class: 'form-textarea' %>
