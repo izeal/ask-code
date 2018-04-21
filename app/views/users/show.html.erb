@@ -24,11 +24,11 @@
     </div>
     <div class="column-1-3">
       <h1 class="title-small"><%= @answers_count %></h1>
-      <p><%= decline(@posts_count, "ответ", "ответа", "ответов") %></p>
+      <p><%= decline(@answers_count, "ответ", "ответа", "ответов") %></p>
     </div>
     <div class="column-1-3">
       <h1 class="title-small"><%= @unanswered_count %></h1>
-      <p><%= decline(@posts_count, "безответный", "безответных", "безответных") %></p>
+      <p><%= decline(@unanswered_count, "безответный", "безответных", "безответных") %></p>
     </div>
   </div>
 </div>
