@@ -10,10 +10,12 @@ User.create(
   name = Faker::Name.name
   login = Faker::LordOfTheRings.character.gsub(" ", "_")
   avatar_url = Faker::Avatar.image
+  header_background_color = Faker::Color.hex_color
   User.create(
     name: name,
     login: "#{login}_#{n}",
     avatar_url: avatar_url,
+    header_background_color: header_background_color,
     email: "#{login}#{n}@bar.baz",
     password: 'foobar'
   )
@@ -23,10 +25,12 @@ end
   name = Faker::Name.name
   login = Faker::HarryPotter.character.gsub(" ", "_")
   avatar_url = Faker::Avatar.image
+  header_background_color = Faker::Color.hex_color
   User.create(
     name: name,
     login: "#{login}_#{n}",
     avatar_url: avatar_url,
+    header_background_color: header_background_color,
     email: "#{login}#{n}@bar.baz",
     password: 'foobar'
   )

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420144605) do
+ActiveRecord::Schema.define(version: 20180421113058) do
 
   create_table "posts", force: :cascade do |t|
     t.string "text"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180420144605) do
     t.string "password_salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "header_background_color", default: "#005a55"
   end
 
 end

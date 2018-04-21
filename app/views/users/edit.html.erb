@@ -39,6 +39,11 @@
       </div>
 
       <div class="form-field">
+        <%= f.label 'Цвет фона блока с аватркой (RGB: #fff, либо "gray")', class: 'form-label' %>
+        <%= f.text_field :header_background_color, class: 'form-text-field' %>
+      </div>
+
+      <div class="form-field">
         <%= f.label :password, 'Пароль', class: 'form-label' %>
         <%= f.password_field :password, class: 'form-text-field' %>
       </div>
