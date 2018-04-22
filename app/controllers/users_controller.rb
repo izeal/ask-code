@@ -52,9 +52,15 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(
-      :name, :login, :email, :header_background_color, :password, :password_confirmation
-    )
+    if current_user && params[:id] == current_user.id
+      params.require(:user).permit(
+        :name, :login, :email, :header_background_color, :password, :password_confirmation
+      )
+    else
+      params.require(:user).permit(
+        :name, :avatar_url, :login, :email, :header_background_color, :password, :password_confirmation
+      )
+    end
   end
 
   def find_user
