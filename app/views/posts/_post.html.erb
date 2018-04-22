@@ -13,7 +13,11 @@
 
     <div class="question-date">
       <%= post.created_at.strftime("%d-%m-%Y %H:%M:%S") %>
-      by <%= link_to find_author(post), link_to_author(post) %>
+      <% if author_of(post) %>
+        by <%= link_to author_of(post).login, user_path(author_of(post)) %>
+      <% else %>
+        by Anonymous
+      <% end %>
       <% if post.user == current_user %>
         <% edit_icon = post.answer ? 'pencil' : 'reply' %>
 
