@@ -5,6 +5,8 @@ class PostsController < ApplicationController
   def create
     @user = User.find_by(id: params[:post][:user_id])
     @post = @user.posts.build(post_params)
+    @post.author_id = current_user.id
+
     if @post.save
       flash[:success] = "Пост создан"
       redirect_to user_path(@user)
@@ -34,6 +36,10 @@ class PostsController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def check_user
+    reject_user unless current_user == @post.user
+  end
+
   private
 
   def post_params
@@ -48,7 +54,4 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def check_user
-    reject_user unless current_user == @post.user
-  end
 end
