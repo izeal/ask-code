@@ -1,11 +1,6 @@
 .form
   = form_for(@post) do |f|
-    - if @post.errors.any?
-      .form-errors
-        ul
-          - @post.errors.full_messages.each do |message|
-            li.form-error-message
-              = message
+    = render partial: 'users/errors', locals: { model: @post }
 
     = f.hidden_field :user_id
 

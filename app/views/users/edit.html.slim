@@ -3,7 +3,7 @@
     = t('user_edit.edit')
   .column-1-2
     = form_for @user do |f|
-      = render partial: 'users/errors'
+      = render partial: 'users/errors', locals: { model: @user }
 
       .buffer-top-large.buffer-bottom
         = t('user_edit.explanations')

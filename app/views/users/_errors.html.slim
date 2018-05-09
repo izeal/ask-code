@@ -1,6 +1,6 @@
-- if @user.errors.any?
+- if model.errors.any?
   .form-errors
     ul
-      - for message in @user.errors.full_messages
+      - for message in model.errors.full_messages
         li.form-error-message
           = message
