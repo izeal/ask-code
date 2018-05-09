@@ -2,18 +2,12 @@ doctype html
 html lang="ru"
   head
     meta charset="utf-8"
-    title
-      | AskCode
+    title AskCode
     link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
-    = csrf_meta_tags
-    = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application'
+    = render partial: 'layouts/rails_default'
   body
     = render partial: 'layouts/header'
     .content
       .container
-        - if flash.any?
-          .content-wrapper.buffer-both
-            - flash.each do |name, message|
-              = content_tag :div, message, class: "flash-#{name}"
+        = render partial: 'layouts/message'
         = yield

@@ -1,28 +1,28 @@
 .container.content-wrapper.buffer-both
-  h1.title-medium
-    | Присоединяйся к нам!
+  h1.title-medium Присоединяйся к нам!
   .column-1-2
     = form_for @user do |f|
-      - if @user.errors.any?
-        .form-errors
-          ul
-            - for message in @user.errors.full_messages
-              li.form-error-message
-                = message
+      = render partial: 'users/errors'
+
       .form-field
         = f.label :email, 'email', class: 'form-label'
         = f.text_field :email, class: 'form-text-field'
+
       .form-field
         = f.label :login, 'Логин', class: 'form-label'
         = f.text_field :login, class: 'form-text-field'
+
       .form-field
         = f.label :name, 'Имя', class: 'form-label'
         = f.text_field :name, class: 'form-text-field'
+
       .form-field
         = f.label :password, 'Пароль', class: 'form-label'
         = f.password_field :password, class: 'form-text-field'
+
       .form-field
         = f.label :password_confirmation, 'Пароль ещё раз', class: 'form-label'
         = f.password_field :password_confirmation, class: 'form-text-field'
+
       .form-action
         = f.submit 'Зарегистрироваться', class: 'button button-small button-dark'

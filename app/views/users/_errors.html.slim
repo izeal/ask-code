@@ -1,0 +1,6 @@
+- if @user.errors.any?
+  .form-errors
+    ul
+      - for message in @user.errors.full_messages
+        li.form-error-message
+          = message

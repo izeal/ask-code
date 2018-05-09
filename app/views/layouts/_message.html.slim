@@ -1,0 +1,4 @@
+- if flash.any?
+  .content-wrapper.buffer-both
+    - flash.each do |name, message|
+      = content_tag :div, message, class: "flash-#{name}"

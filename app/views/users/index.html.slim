@@ -1,8 +1,5 @@
 .content-wrapper.buffer-both.text-center
   .buffer-both
-    h1.title-medium
-      | Наши пользователи
-  - @users.each do |user|
-    .users-list-item
-      .user-image-div.user-image-div-small
-        = link_to image_tag(user.avatar_url, class: 'user-image'), user_path(user)
+    h1.title-medium Наши пользователи
+
+  = render partial: 'users/user', collection: @users

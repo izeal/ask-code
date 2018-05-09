@@ -6,15 +6,19 @@
           - @post.errors.full_messages.each do |message|
             li.form-error-message
               = message
+
     = f.hidden_field :user_id
+
     .form-field
       = f.label :text, 'Вопрос', class: 'form-label'
       = f.text_area :text, class: 'form-textarea'
+
     - if current_user && current_user == @post.user
       .form-field
         = f.label :answer, 'Ответ', class: 'form-label'
         = f.text_area :answer, class: 'form-textarea'
+
     .form-action.buffer-both
       = f.submit 'Сохранить', class: 'button button-dark button-small'
-      |  или 
+      |  или
       = link_to "вернуться", user_path(@post.user)
