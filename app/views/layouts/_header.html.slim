@@ -1,0 +1,16 @@
+.header
+  .container
+    .header-logo
+      h1.header-title
+        = link_to "AskCode", root_path
+
+    .header-nav
+      - if current_user
+        = link_to "#{current_user.login}", user_path(current_user)
+        |  |
+        = link_to "Настройки", edit_user_path(session[:user_id])
+        |  |
+        = link_to 'Выйти', logout_path, method: :delete
+      - else
+        = link_to 'Sign up!', signup_path, class: 'button button-light button-small'
+        = link_to 'Log in', login_path, class: 'button button-light button-small'

@@ -1,0 +1,38 @@
+.container.content-wrapper.buffer-both
+  h1.title-medium
+    | Настройки профиля
+  .column-1-2
+    = form_for @user do |f|
+      - if @user.errors.any?
+        .form-errors
+          ul
+            - for message in @user.errors.full_messages
+              li.form-error-message
+                = message
+      .buffer-top-large.buffer-bottom
+        |  Введите новое значение в поле которое хотите изменить 
+      .form-field
+        = f.label :email, 'email', class: 'form-label'
+        = f.text_field :email, class: 'form-text-field'
+      .form-field
+        = f.label :login, 'Логин', class: 'form-label'
+        = f.text_field :login, class: 'form-text-field'
+      .form-field
+        = f.label :name, 'Имя', class: 'form-label'
+        = f.text_field :name, class: 'form-text-field'
+      .form-field
+        = f.label 'URL вашей аватарки', class: 'form-label'
+        = f.text_field :avatar_url, class: 'form-text-field'
+      .form-field
+        = f.label 'Цвет фона блока с аватркой (RGB: #005a55, либо: gray)', class: 'form-label'
+        = f.text_field :header_background_color, class: 'form-text-field'
+      .form-field
+        = f.label :password, 'Пароль', class: 'form-label'
+        = f.password_field :password, class: 'form-text-field'
+      .form-field
+        = f.label :password_confirmation, 'Пароль ещё раз', class: 'form-label'
+        = f.password_field :password_confirmation, class: 'form-text-field'
+      .form-action
+        = f.submit 'Изменить', class: 'button button-small button-dark'
+    p
+      = link_to "удалить аккаунт", user_path, method: :delete, data: {confirm: 'Вы уверены?'}

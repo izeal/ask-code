@@ -10,6 +10,7 @@ gem 'puma', '~> 3.7'
 gem 'jquery-rails'
 gem 'uglifier'
 gem 'faker'
+gem 'slim-rails'
 gem 'rails_12factor'
 
 group :development, :test do
