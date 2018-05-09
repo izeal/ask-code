@@ -10,15 +10,15 @@
     = f.hidden_field :user_id
 
     .form-field
-      = f.label :text, 'Вопрос', class: 'form-label'
+      = f.label :text, class: 'form-label'
       = f.text_area :text, class: 'form-textarea'
 
     - if current_user && current_user == @post.user
       .form-field
-        = f.label :answer, 'Ответ', class: 'form-label'
+        = f.label :answer, class: 'form-label'
         = f.text_area :answer, class: 'form-textarea'
 
     .form-action.buffer-both
-      = f.submit 'Сохранить', class: 'button button-dark button-small'
-      |  или
-      = link_to "вернуться", user_path(@post.user)
+      = f.submit t('post.save'), class: 'button button-dark button-small'
+      = " #{t('post.or')} "
+      = link_to t('post.back'), user_path(@post.user)

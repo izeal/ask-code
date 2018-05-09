@@ -8,10 +8,10 @@
       - if current_user
         = link_to "#{current_user.login}", user_path(current_user), class: 'button button-light button-small'
         '
-        = link_to "Настройки", edit_user_path(session[:user_id]), class: 'button button-light button-small'
+        = link_to t('header.settings'), edit_user_path(session[:user_id]), class: 'button button-light button-small'
         '
-        = link_to 'Выйти', logout_path, method: :delete, class: 'button button-light button-small'
+        = link_to t('header.log_out'), logout_path, method: :delete, class: 'button button-light button-small'
       - else
-        = link_to 'Sign up!', signup_path, class: 'button button-light button-small'
+        = link_to t('header.sign_up'), signup_path, class: 'button button-light button-small'
         '
-        = link_to 'Log in', login_path, class: 'button button-light button-small'
+        = link_to t('header.log_in'), login_path, class: 'button button-light button-small'

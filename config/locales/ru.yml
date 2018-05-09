@@ -1,0 +1,68 @@
+ru:
+  activerecord:
+    model:
+      user: 'Пользователь'
+      post: 'Вопрос'
+    attributes:
+      post:
+        text: 'Впорос'
+        answer: 'Ответ'
+      user:
+        email: 'Емэйл'
+        name: 'Имя'
+        login: 'Логин'
+        avatar_url: 'URL вашей аватарки'
+        header_background_color: 'Цвет фона блока с аватркой (пример: #005a55)'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+
+  header:
+    settings: 'Настройки'
+    log_out: 'Выйти'
+    log_in: 'Войти'
+    sign_up: 'Зарегистрироваться'
+  post:
+    save: 'Сохранить'
+    or: 'или'
+    back: 'вернуться'
+    from: 'от'
+    anonymous: 'аноним'
+    destroy_confirmation: 'Точно удалить вопрос?'
+  session:
+    log_in: 'Войти на сайт'
+    log_in: 'Войти'
+  form:
+    email: 'Емэйл'
+    name: 'Имя'
+    login: 'Логин'
+    avatar_url: 'URL вашей аватарки'
+    header_background_color: 'Цвет фона блока с аватркой (пример: #005a55)'
+    password: 'Пароль'
+    password_confirmation: 'Подтверждение пароля'
+  user_edit:
+    edit: 'Настройки профиля'
+    explanations: 'Введите новое значение в поле которое хотите изменить'
+    change: 'Изменить'
+    destroy_acc: 'удалить аккаунт'
+    destroy_confirmation: 'Вы уверены что хотите удалить аккаунт?'
+  index:
+    users: 'Наши пользователи'
+  new:
+    enjoy: 'Присоединяйся к нам!'
+    sign_up: 'Зарегистрироваться'
+  show:
+    ask_me: 'Спроси меня'
+    question:
+      first_form: 'вопрос'
+      second_form: 'вопроса'
+      therd_form: 'вопросов'
+    answer:
+      first_form: 'ответ'
+      second_form: 'ответа'
+      therd_form: 'ответов'
+    not_answered:
+      first_form: 'безответный'
+      second_form: 'безответных'
+      therd_form: 'безответных'
+    question_for: 'Ваш вопрос для'
+    ask: 'Спросить'

@@ -1,16 +1,17 @@
 .container.content-wrapper.buffer-both
-  h1.title-medium Войти на сайт
+  h1.title-medium
+    = t('session.log_in')
   .column-1-2
     .form
       = form_tag sessions_path do
 
         .form-field
-          = label_tag :email, 'email', class: 'form-label'
-          = text_field_tag :email, params[:email], class: 'form-text-field', placeholder: :email
+          = label_tag :email, t('form.email'), class: 'form-label'
+          = text_field_tag :email, params[:email], class: 'form-text-field', placeholder: t('form.email')
 
         .form-field
-          = label_tag :password, 'Пароль', class: 'form-label'
-          = password_field_tag :password, '', class: 'form-text-field', placeholder: :password
+          = label_tag :password, t('form.password'), class: 'form-label'
+          = password_field_tag :password, '', class: 'form-text-field', placeholder: t('form.password')
 
         .form-action
-          = submit_tag "Войти", class: 'button button-dark button-small'
+          = submit_tag t('session.log_in'), class: 'button button-dark button-small'
