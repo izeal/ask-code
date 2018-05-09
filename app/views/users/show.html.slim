@@ -15,24 +15,7 @@ h2.title-small.buffer-both
 .user-ask-button.container.text-center
   = link_to t('show.ask_me'), '', class: 'button button-light', id: 'ask-button'
 
-.user-statistics.container.text-center
-  .column-1-3
-    h1.title-small
-      = @posts_count
-    p
-      = decline(@posts_count, t('show.question.first_form'), t('show.question.second_form'), t('show.question.therd_form'))
-
-  .column-1-3
-    h1.title-small
-      = @answers_count
-    p
-      = decline(@answers_count, t('show.answer.first_form'), t('show.answer.second_form'), t('show.answer.therd_form'))
-
-  .column-1-3
-    h1.title-small
-      = @unanswered_count
-    p
-      = decline(@unanswered_count, t('show.not_answered.first_form'), t('show.not_answered.second_form'), t('show.not_answered.therd_form'))
+= render partial: 'users/statistic_bar', locals: { posts_count: @posts_count, answers_count: @answers_count, unanswered_count: @unanswered_count }
 
 #ask-form.user-question-form-div
   .user-question-form.buffer-both

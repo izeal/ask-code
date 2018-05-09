@@ -7,7 +7,7 @@ class User < ApplicationRecord
   VALID_LOGIN_REGEX = /\A\w+\d*\z/
   VALID_AVATAR_URL_REGEX = /\Ahttp(s)?:\/\/.*\z/
 
-  has_many :posts, dependent: :nullify
+  has_many :posts, dependent: :destroy
 
   validates :name, presence: true
   validates :login,
