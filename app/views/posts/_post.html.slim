@@ -3,21 +3,35 @@
     .question-text.text-lead
       = post.text
 
-      - if post.answer
+      - if post.comments.any?
         .question-answer.text-lead
-          = post.answer
+          = post.comments.first.text
 
     .question-date
-      = post.created_at.strftime("%d-%m-%Y %H:%M:%S")
+      = post.updated_at.strftime("%d-%m-%Y %H:%M:%S")
       = " #{t('post.from')} "
       - if author_of(post)
         = link_to author_of(post).login, user_path(author_of(post))
       - else
         = t('post.anonymous')
-
-      - if post.user == current_user
-        - edit_icon = post.answer ? 'pencil' : 'reply'
+      '
+      / если ты автор вопроса то можешь его редактировать пока нет ответа
+      - if author_of?(post) && post.comments.empty?
+        = link_to fa_icon('pencil'), edit_post_path(post)
         '
-        = link_to fa_icon(edit_icon), edit_post_path(post)
+      / если тебе задали вопрос ты можешь на него ответить если нет ответа
+      - if owner_of?(post) && post.comments.empty?
+        = link_to fa_icon('reply'), new_post_comment_path(post)
         '
+      / если ты ответил то можешь его редактировать
+      - if owner_of?(post.comments.first) && post.comments.any?
+        = link_to fa_icon('pencil'), edit_post_comment_path(post, post.comments.first)
+        '
+      / еслиты либо автор либо тот кого спросили то можешь удалить вопрос
+       пока на него нет ответа
+      - if (owner_of?(post) || author_of?(post)) && post.comments.empty?
         = link_to fa_icon('trash-o'), post_path(post), method: :delete, data: { confirm: t('post.destroy_confirmation') }
+        '
+      / если ты автор ответа то можешь его удалить
+      - if owner_of?(post.comments.first) && post.comments.any?
+        = link_to fa_icon('trash-o'), post_comment_path(post, post.comments.first), method: :delete, data: { confirm: 'Вы уверены что хотите удалить ответ?' }

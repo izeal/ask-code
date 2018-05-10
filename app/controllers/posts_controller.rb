@@ -17,16 +17,18 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @comment = @post.comments.build(params[:comment])
   end
 
   def update
     if @post.update(post_params)
       flash[:success] = "Пост обновлен"
+      redirect_to user_path(@post.user)
     else
       flash[:danger] = "Текст поста не может превышать
                         255 символов либо быть пустым"
+      render 'edit'
     end
-      redirect_to user_path(@post.user)
   end
 
   def destroy
@@ -37,14 +39,14 @@ class PostsController < ApplicationController
   end
 
   def check_user
-    reject_user unless current_user == @post.user
+    reject_user unless current_user == @post.author || current_user == @post.user
   end
 
   private
 
   def post_params
     if current_user && params[:post][:user_id].to_i == current_user.id
-      params.require(:post).permit(:user_id, :text, :answer, :author_id)
+      params.require(:post).permit(:user_id, :text, :author_id)
     else
       params.require(:post).permit(:user_id, :text, :author_id)
     end
@@ -53,5 +55,4 @@ class PostsController < ApplicationController
   def find_post
     @post = Post.find(params[:id])
   end
-
 end

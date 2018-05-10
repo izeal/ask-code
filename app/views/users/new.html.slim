@@ -3,7 +3,7 @@
     = t('new.enjoy')
   .column-1-2
     = form_for @user do |f|
-      = render partial: 'users/errors'
+      = render partial: 'users/errors', locals: { model: @user }
 
       .form-field
         = f.label :email, class: 'form-label'

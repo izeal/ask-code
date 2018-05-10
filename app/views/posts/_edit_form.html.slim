@@ -1,0 +1,35 @@
+- if current_user == @post.author
+  .form
+    = form_for(@post) do |f|
+      = render partial: 'users/errors', locals: { model: @post }
+
+      = f.hidden_field :user_id
+
+      .form-field
+        = f.label :text, class: 'form-label'
+        = f.text_area :text, class: 'form-textarea'
+
+      .form-action.buffer-both
+        = f.submit t('post.save'), class: 'button button-dark button-small'
+        = " #{t('post.or')} "
+        = link_to t('post.back'), user_path(@post.user)
+
+/ .form
+/   = form_for(@post) do |f|
+/     = render partial: 'users/errors', locals: { model: @post }
+
+/     = f.hidden_field :user_id
+
+/     .form-field
+/       = f.label :text, class: 'form-label'
+/       = f.text_area :text, class: 'form-textarea'
+
+/     - if current_user && current_user == @post.user
+/       .form-field
+/         = f.label :comments, class: 'form-label'
+/         = f.text_area :comments, class: 'form-textarea'
+
+/     .form-action.buffer-both
+/       = f.submit t('post.save'), class: 'button button-dark button-small'
+/       = " #{t('post.or')} "
+/       = link_to t('post.back'), user_path(@post.user)

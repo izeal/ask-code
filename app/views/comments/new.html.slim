@@ -1,17 +1,10 @@
 .form
-  = form_for(@post) do |f|
-    = render partial: 'users/errors', locals: { model: @post }
-
-    = f.hidden_field :user_id
+  = form_for [@post, @comment] do |f|
+    = render partial: 'users/errors', locals: { model: @comment }
 
     .form-field
       = f.label :text, class: 'form-label'
       = f.text_area :text, class: 'form-textarea'
-
-    - if current_user && current_user == @post.user
-      .form-field
-        = f.label :answer, class: 'form-label'
-        = f.text_area :answer, class: 'form-textarea'
 
     .form-action.buffer-both
       = f.submit t('post.save'), class: 'button button-dark button-small'

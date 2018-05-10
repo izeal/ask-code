@@ -22,4 +22,14 @@ module ApplicationHelper
   def author_id_finder
     current_user.id
   end
+
+  def author_of?(post)
+    return if post.nil?
+    post.author == current_user
+  end
+
+  def owner_of?(model)
+    return if model.nil?
+    model.user == current_user
+  end
 end

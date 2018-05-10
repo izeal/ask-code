@@ -23,8 +23,8 @@ class UsersController < ApplicationController
     @post = @user.posts.build
     @posts = @user.posts.select(&:persisted?).sort_by(&:created_at).reverse
     @posts_count = @user.posts.count
-    @answers_count = @user.posts.where.not(answer: nil).count
-    @unanswered_count = @posts_count - @answers_count
+    # @answers_count = @user.posts.where.not(answer: nil).count
+    # @unanswered_count = @posts_count - @answers_count
   end
 
   def index

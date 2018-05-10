@@ -15,7 +15,7 @@ h2.title-small.buffer-both
 .user-ask-button.container.text-center
   = link_to t('show.ask_me'), '', class: 'button button-light', id: 'ask-button'
 
-= render partial: 'users/statistic_bar', locals: { posts_count: @posts_count, answers_count: @answers_count, unanswered_count: @unanswered_count }
+= render partial: 'users/statistic_bar', locals: { posts_count: @posts_count }
 
 #ask-form.user-question-form-div
   .user-question-form.buffer-both
@@ -32,5 +32,4 @@ h2.title-small.buffer-both
 .column-3-4
   .user-questions.buffer-both
     .questions-list
-      - @posts.each do |post|
-        = render partial: 'posts/post', object: post
+      = render partial: 'posts/post', collection: @posts

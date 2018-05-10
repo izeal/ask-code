@@ -1,0 +1,12 @@
+.form
+  = form_for [@post, @comment] do |f|
+    = render partial: 'users/errors', locals: { model: @comment }
+
+    .form-field
+      = f.label :text, class: 'form-label'
+      = f.text_area :text, class: 'form-textarea'
+
+    .form-action.buffer-both
+      = f.submit t('post.save'), class: 'button button-dark button-small'
+      = " #{t('post.or')} "
+      = link_to t('post.back'), user_path(@comment.post.user)
