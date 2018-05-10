@@ -5,7 +5,7 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_EMAIL_REGEX = /\A[\w+\d*\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_LOGIN_REGEX = /\A\w+\d*\z/
-  VALID_AVATAR_URL_REGEX = /\Ahttp(s)?:\/\/.*\z/
+  VALID_AVATAR_URL_REGEX = /\A(http(s)?:\/\/.*)|(\/assets\/.*)\z/
 
   has_many :posts, dependent: :destroy
 
