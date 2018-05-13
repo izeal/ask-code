@@ -1,0 +1,15 @@
+.question-answer.text-lead
+  = comment.text
+
+.question-date
+  = comment.created_at_at.strftime("%d-%m-%Y %H:%M:%S")
+  = " #{t('post.from')} "
+  - if author_of(comment)
+    = link_to author_of(comment).login, user_path(author_of(comment))
+  - else
+    = t('post.anonymous')
+    '
+  / если ты зареган то можешь оставлять комменты
+  - if current_user
+    = link_to fa_icon('reply'), new_post_comment_path(post)
+    '

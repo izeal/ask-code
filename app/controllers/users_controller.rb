@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     @posts_count = @user.posts.count
     @answers_count = @user.posts.select{ |p| p.comments.present? }.count
     @unanswered_count = @posts_count - @answers_count
+    @comments = @post.comments
   end
 
   def index
