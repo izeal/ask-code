@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def create
     @user = User.find_by(id: params[:post][:user_id])
     @post = @user.posts.build(post_params)
-    @post.author = current_user if current_user
+    @post.author = current_user if current_user.class == User
 
     if @post.save
       flash[:success] = "Пост создан"

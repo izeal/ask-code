@@ -25,11 +25,16 @@ module ApplicationHelper
 
   def author_of?(post)
     return if post.nil?
+    return if current_user.nil?
     post.author == current_user
   end
 
   def owner_of?(model)
     return if model.nil?
     model.user == current_user
+  end
+
+  def is_this_the_last?(comment)
+    comment.post.comments.last == comment
   end
 end

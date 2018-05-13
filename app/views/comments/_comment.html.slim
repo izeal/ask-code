@@ -1,15 +1,22 @@
-.question-answer.text-lead
+.question-text.text-lead
   = comment.text
 
 .question-date
-  = comment.created_at_at.strftime("%d-%m-%Y %H:%M:%S")
+  = comment.created_at.strftime("%d-%m-%Y %H:%M:%S")
   = " #{t('post.from')} "
-  - if author_of(comment)
-    = link_to author_of(comment).login, user_path(author_of(comment))
+  - if comment.user
+    = link_to comment.user.login, user_path(comment.user)
   - else
     = t('post.anonymous')
+  '
+  / комменты могут оставлять все но только к последнему комменту
+  - if is_this_the_last?(comment)
+    = link_to fa_icon('reply'), new_post_comment_path(comment.post)
     '
-  / если ты зареган то можешь оставлять комменты
-  - if current_user
-    = link_to fa_icon('reply'), new_post_comment_path(post)
+  / коммент может редактировать только автор и то если это последний комментарий
+  - if owner_of?(comment) && is_this_the_last?(comment)
+    = link_to fa_icon('pencil'), edit_post_comment_path(comment.post, comment)
     '
+  / Коммент удалить может author если он последний и юзер всегда
+  - if (owner_of?(comment) && is_this_the_last?(comment)) || comment.post.user == current_user
+    = link_to fa_icon('trash-o'), post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Вы уверены что хотите удалить ответ?' }

@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
+
     if @comment.save
       flash[:success] = "Комментарий написан"
       redirect_to user_path(@post.user)

@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    @current_user ||= Anonymous.new
   end
 
   def reject_user
