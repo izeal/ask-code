@@ -25,6 +25,11 @@
          пока на него нет ответа
         - if owner_of?(post) || (author_of?(post) && post.comments.empty?)
           = link_to fa_icon('trash-o'), post_path(post), method: :delete, data: { confirm: t('post.destroy_confirmation') }
+          '
+
+        - post.hashtags.each do |hashtag|
+          = hashtag.tag
+          '
 
     - if post.comments.any?
       = render partial: 'comments/comment', collection: post.comments

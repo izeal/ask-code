@@ -20,3 +20,8 @@
   / Коммент удалить может author если он последний и юзер всегда
   - if (owner_of?(comment) && is_this_the_last?(comment)) || comment.post.user == current_user
     = link_to fa_icon('trash-o'), post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Вы уверены что хотите удалить ответ?' }
+    '
+
+  - comment.hashtags.each do |hashtag|
+    = hashtag.tag
+    '

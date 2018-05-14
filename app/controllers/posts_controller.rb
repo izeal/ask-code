@@ -8,6 +8,7 @@ class PostsController < ApplicationController
     @post.author = current_user if current_user
 
     if @post.save
+      find_hashtag_in(@post)
       flash[:success] = "Пост создан"
       redirect_to user_path(@user)
     else

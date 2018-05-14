@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+      find_hashtag_in(@comment)
       flash[:success] = "Комментарий написан"
       redirect_to user_path(@post.user)
     else

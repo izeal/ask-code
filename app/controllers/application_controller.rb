@@ -16,4 +16,10 @@ class ApplicationController < ActionController::Base
   def author_of(post)
     User.find_by(id: post.author_id)
   end
+
+  def find_hashtag_in(model)
+    model.text.scan(/#[a-z]+/i).each do |hashtag|
+      model.hashtags.create!(tag: hashtag)
+    end
+  end
 end
