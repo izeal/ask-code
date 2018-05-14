@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.order("RANDOM()").limit(77)
+    @hashtags = Hashtag.order("RANDOM()").limit(30)
   end
 
   def edit

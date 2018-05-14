@@ -18,8 +18,13 @@ class ApplicationController < ActionController::Base
   end
 
   def find_hashtag_in(model)
-    model.text.scan(/#[a-z]+/i).each do |hashtag|
+    model.text.scan(/#\p{L}+/i).each do |hashtag|
       model.hashtags.create!(tag: hashtag)
     end
+  end
+
+  def find_posts_with(tag)
+    hashtags = Hashtag.includes(:comment).where(tag: tag)
+    (hashtags.map(&:post).compact + hashtags.map(&:comment).compact.map(&:post)).uniq
   end
 end

@@ -28,7 +28,7 @@
           '
 
         - post.hashtags.each do |hashtag|
-          = hashtag.tag
+          = link_to hashtag.tag, "#"
           '
 
     - if post.comments.any?
