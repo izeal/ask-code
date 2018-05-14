@@ -3,9 +3,6 @@
     .question-text.text-lead
       = post.text
 
-      - if post.comments.any?
-        .question-answer.text-lead
-          = post.comments.first.text
 
     .question-date
       = post.updated_at.strftime("%d-%m-%Y %H:%M:%S")
@@ -13,26 +10,21 @@
       - if author_of(post)
         = link_to author_of(post).login, user_path(author_of(post))
       - else
-        = t('post.anonymous')
+        = post.author_object.login
       '
-      -if current_user
-        / если ты автор вопроса то можешь его редактировать пока нет ответа
-        - if author_of?(post) && post.comments.empty?
-          = link_to fa_icon('pencil'), edit_post_path(post)
-          '
+      - if current_user
         / если тебе задали вопрос ты можешь на него ответить если нет ответа
         - if owner_of?(post) && post.comments.empty?
           = link_to fa_icon('reply'), new_post_comment_path(post)
           '
-        / если ты ответил то можешь его редактировать
-        - if owner_of?(post.comments.first) && post.comments.any?
-          = link_to fa_icon('pencil'), edit_post_comment_path(post, post.comments.first)
+        / если ты автор вопроса то можешь его редактировать пока нет ответа
+        - if author_of?(post) && post.comments.empty?
+          = link_to fa_icon('pencil'), edit_post_path(post)
           '
         / еслиты либо автор либо тот кого спросили то можешь удалить вопрос
          пока на него нет ответа
-        - if (owner_of?(post) || author_of?(post)) && post.comments.empty?
+        - if owner_of?(post) || (author_of?(post) && post.comments.empty?)
           = link_to fa_icon('trash-o'), post_path(post), method: :delete, data: { confirm: t('post.destroy_confirmation') }
-          '
-        / если ты автор ответа то можешь его удалить
-        - if owner_of?(post.comments.first) && post.comments.any?
-          = link_to fa_icon('trash-o'), post_comment_path(post, post.comments.first), method: :delete, data: { confirm: 'Вы уверены что хотите удалить ответ?' }
+
+    - if post.comments.any?
+      = render partial: 'comments/comment', collection: post.comments

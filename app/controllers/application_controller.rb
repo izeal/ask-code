@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
+  helper_method :author_of
 
   private
 
@@ -10,5 +11,9 @@ class ApplicationController < ActionController::Base
 
   def reject_user
     redirect_to root_path, alert: 'Вам сюда низя!'
+  end
+
+  def author_of(post)
+    User.find_by(id: post.author_id)
   end
 end

@@ -26,7 +26,6 @@ ru:
     or: 'или'
     back: 'вернуться'
     from: 'от'
-    anonymous: 'аноним'
     destroy_confirmation: 'Точно удалить вопрос?'
   session:
     log_in: 'Войти на сайт'

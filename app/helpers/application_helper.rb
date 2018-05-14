@@ -32,4 +32,8 @@ module ApplicationHelper
     return if model.nil?
     model.user == current_user
   end
+
+  def is_this_the_last?(comment)
+    comment.post.comments.last == comment
+  end
 end
