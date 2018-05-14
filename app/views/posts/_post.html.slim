@@ -10,20 +10,21 @@
       - if author_of(post)
         = link_to author_of(post).login, user_path(author_of(post))
       - else
-        = t('post.anonymous')
+        = post.author_object.login
       '
-      / если тебе задали вопрос ты можешь на него ответить если нет ответа
-      - if owner_of?(post) && post.comments.empty?
-        = link_to fa_icon('reply'), new_post_comment_path(post)
-        '
-      / если ты автор вопроса то можешь его редактировать пока нет ответа
-      - if author_of?(post) && post.comments.empty?
-        = link_to fa_icon('pencil'), edit_post_path(post)
-        '
-      / еслиты либо автор либо тот кого спросили то можешь удалить вопрос
-       пока на него нет ответа
-      - if owner_of?(post) || (author_of?(post) && post.comments.empty?)
-        = link_to fa_icon('trash-o'), post_path(post), method: :delete, data: { confirm: t('post.destroy_confirmation') }
+      - if current_user
+        / если тебе задали вопрос ты можешь на него ответить если нет ответа
+        - if owner_of?(post) && post.comments.empty?
+          = link_to fa_icon('reply'), new_post_comment_path(post)
+          '
+        / если ты автор вопроса то можешь его редактировать пока нет ответа
+        - if author_of?(post) && post.comments.empty?
+          = link_to fa_icon('pencil'), edit_post_path(post)
+          '
+        / еслиты либо автор либо тот кого спросили то можешь удалить вопрос
+         пока на него нет ответа
+        - if owner_of?(post) || (author_of?(post) && post.comments.empty?)
+          = link_to fa_icon('trash-o'), post_path(post), method: :delete, data: { confirm: t('post.destroy_confirmation') }
 
     - if post.comments.any?
       = render partial: 'comments/comment', collection: post.comments

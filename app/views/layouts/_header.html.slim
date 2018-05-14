@@ -5,7 +5,7 @@
         = link_to "AskCode", root_path
 
     .header-nav
-      - unless current_user.class == Anonymous
+      - if current_user
         = link_to "#{current_user.login}", user_path(current_user), class: 'button button-light button-small'
         '
         = link_to t('header.settings'), edit_user_path(session[:user_id]), class: 'button button-light button-small'

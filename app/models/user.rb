@@ -8,6 +8,7 @@ class User < ApplicationRecord
   VALID_AVATAR_URL_REGEX = /\A(http(s)?:\/\/.*)|(\/assets\/.*)\z/
 
   has_many :posts, dependent: :destroy
+  has_many :comments
 
   validates :name, presence: true
   validates :login,

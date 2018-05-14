@@ -5,9 +5,9 @@
   = comment.created_at.strftime("%d-%m-%Y %H:%M:%S")
   = " #{t('post.from')} "
   - if comment.user
-    = link_to comment.user.login, user_path(comment.user)
+    = link_to comment.user_object.login, user_path(comment.user)
   - else
-    = t('post.anonymous')
+    = comment.user_object.login
   '
   / комменты могут оставлять все но только к последнему комменту
   - if is_this_the_last?(comment)

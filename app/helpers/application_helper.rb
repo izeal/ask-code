@@ -25,7 +25,6 @@ module ApplicationHelper
 
   def author_of?(post)
     return if post.nil?
-    return if current_user.nil?
     post.author == current_user
   end
 

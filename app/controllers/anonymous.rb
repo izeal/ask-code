@@ -1,17 +1,25 @@
 class Anonymous
-  attr_reader :name, :login, :email, :avatar_url
+  def login
+    "Anonymous"
+  end
 
-  def initialize
-    @name = "Anonymous"
-    @email = ""
-    @login = "Anonymous"
-    @avatar_url = ''
+  def name
+    nil
+  end
+
+  def email
+    nil
+  end
+
+  def avatar_url
+    nil
   end
 
   def posts
-    []
+    nil
   end
 
   def id
+    nil
   end
 end
