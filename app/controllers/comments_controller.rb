@@ -11,11 +11,10 @@ class CommentsController < ApplicationController
 
     if @comment.save
       find_hashtag_in(@comment)
-      flash[:success] = "Комментарий написан"
+      flash[:success] = t('controllers.comments.created')
       redirect_to user_path(@post.user)
     else
-      flash[:danger] = "Текст комментария не может превышать
-                        255 символов либо быть пустым"
+      flash[:danger] = t('controllers.comments.error')
       render 'new'
     end
   end
@@ -29,11 +28,10 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       @comment.hashtags.destroy_all
       find_hashtag_in(@comment)
-      flash[:success] = "Пост обновлен"
+      flash[:success] = t('controllers.comments.updated')
       redirect_to user_path(@post.user)
     else
-      flash[:danger] = "Текст ответа не может превышать
-                        255 символов либо быть пустым"
+      flash[:danger] = t('controllers.comments.error')
       render 'edit'
     end
   end
@@ -42,7 +40,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @user = @comment.user
     @comment.destroy
-    flash[:success] = "Ответ удален"
+    flash[:success] = t('controllers.comments.destroyed')
     redirect_to user_path(@user)
   end
 
