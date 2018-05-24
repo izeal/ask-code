@@ -27,8 +27,8 @@
           = link_to fa_icon('trash-o'), post_path(post), method: :delete, data: { confirm: t('post.destroy_confirmation') }
           '
 
-        - post.hashtags.each do |hashtag|
-          = link_to hashtag.tag, "#"
+        - post.hashtags.distinct.pluck(:tag).each do |hashtag|
+          = link_to hashtag, hashtag_posts_path(hashtag)
           '
 
     - if post.comments.any?

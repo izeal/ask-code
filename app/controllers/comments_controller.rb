@@ -27,6 +27,8 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
+      @comment.hashtags.destroy_all
+      find_hashtag_in(@comment)
       flash[:success] = "Пост обновлен"
       redirect_to user_path(@post.user)
     else
