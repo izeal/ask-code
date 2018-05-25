@@ -2,7 +2,7 @@
   .form
     = form_for(@post) do |f|
       = render partial: 'users/errors', locals: { model: @post }
-
+      / посмотреть нужно ли оно
       = f.hidden_field :user_id
 
       .form-field
