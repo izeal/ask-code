@@ -8,11 +8,11 @@ class PostsController < ApplicationController
     @post.author = current_user if current_user
 
     if @post.save
-      flash[:success] = "Пост создан"
+      find_hashtag_in(@post)
+      flash[:success] = t('controllers.posts.created')
       redirect_to user_path(@user)
     else
-      flash[:danger] = "Текст поста не может превышать
-                        255 символов либо быть пустым"
+      flash[:danger] = t('controllers.posts.error')
     end
   end
 
@@ -22,11 +22,12 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:success] = "Пост обновлен"
+      @post.hashtags.destroy_all
+      find_hashtag_in(@post)
+      flash[:success] = t('controllers.posts.updated')
       redirect_to user_path(@post.user)
     else
-      flash[:danger] = "Текст поста не может превышать
-                        255 символов либо быть пустым"
+      flash[:danger] = t('controllers.posts.error')
       render 'edit'
     end
   end
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
   def destroy
     @user = @post.user
     @post.destroy
-    flash[:success] = "Пост удален"
+    flash[:success] = t('controllers.posts.destroyed')
     redirect_to user_path(@user)
   end
 

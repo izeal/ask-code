@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :comments
+  has_many :hashtags
 
   validates :name, presence: true
   validates :login,

@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   root 'users#index'
 
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resource :sessions, only: [:new, :create, :destroy]
   resources :posts do
     resources :comments
+  end
+  resources :hashtags, only: [:show] do
+    get "posts"
   end
 
   get 'signup', to: 'users#new'

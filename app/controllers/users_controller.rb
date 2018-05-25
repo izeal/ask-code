@@ -10,11 +10,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     default_avatar(@user)
     if @user.save
-      flash[:success] = "Вы успешно зарегистрировались"
+      flash[:success] = t('controllers.users.created')
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      flash[:danger] = "Корректно заполните все поля"
+      flash[:danger] = t('controllers.users.error')
       render 'new'
     end
   end
@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.order("RANDOM()").limit(77)
+    @hashtags = Hashtag.distinct.pluck(:tag).shuffle.take(10)
   end
 
   def edit
@@ -36,16 +37,16 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: "Данные успешно обновлены"
+      redirect_to user_path(@user), notice: t('controllers.users.updated')
     else
-      flash.now[:danger] = "Мы не смогли обновить ваш профиль по следующим причинам:"
+      flash.now[:danger] = t('controllers.users.update_error')
       render 'edit'
     end
   end
 
   def destroy
     @user.destroy
-    flash[:success] = "Пользователь успешно удален"
+    flash[:success] = t('controllers.users.destroyed')
     redirect_to users_path
   end
 
