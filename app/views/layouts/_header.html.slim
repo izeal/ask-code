@@ -10,8 +10,8 @@
         '
         = link_to t('header.settings'), edit_user_path(session[:user_id]), class: 'button button-light button-small'
         '
-        = link_to t('header.log_out'), logout_path, method: :delete, class: 'button button-light button-small'
+        = link_to t('header.log_out'), session_path, method: :delete, class: 'button button-light button-small'
       - else
-        = link_to t('header.sign_up'), signup_path, class: 'button button-light button-small'
+        = link_to t('header.sign_up'), new_user_path, class: 'button button-light button-small'
         '
-        = link_to t('header.log_in'), login_path, class: 'button button-light button-small'
+        = link_to t('header.log_in'), new_session_path, class: 'button button-light button-small'
