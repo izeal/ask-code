@@ -7,9 +7,9 @@ class PostsController < ApplicationController
     @post = @user.posts.build(post_params)
     @post.author = current_user if current_user
 
-    if @post.save
+    if @post.save && check_captcha(@post) # todo errors if captcha falsey
       find_hashtag_in(@post)
-      flash[:success] = t('controllers.posts.created')
+      flash[:success] = t('controllers.posts.created') #todo normal flash
       redirect_to user_path(@user)
     else
       flash[:danger] = t('controllers.posts.error')

@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
 
-    if @comment.save
+    if @comment.save && check_captcha(@comment)
       find_hashtag_in(@comment)
       flash[:success] = t('controllers.comments.created')
       redirect_to user_path(@post.user)

@@ -30,4 +30,8 @@ class ApplicationController < ActionController::Base
     hashtags = Hashtag.includes(:comment).where(tag: tag)
     (hashtags.map(&:post).compact + hashtags.map(&:comment).compact.map(&:post)).uniq
   end
+
+  def check_captcha(model)
+    current_user ? true : verify_recaptcha(model: model)
+  end
 end
