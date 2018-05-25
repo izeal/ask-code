@@ -4,24 +4,22 @@
 .question-date
   = comment.created_at.strftime("%d-%m-%Y %H:%M:%S")
   = " #{t('post.from')} "
-  - if comment.user
-    = link_to comment.user_object.login, user_path(comment.user)
-  - else
-    = comment.user_object.login
+
+  = link_to_unless(comment.user_object.null_object?, comment.user_object.login, user_path(comment.user_object))
   '
+  - comment.hashtags.distinct.pluck(:tag).each do |hashtag|
+    = link_to hashtag, hashtag_posts_path(hashtag)
+    '
   / комменты могут оставлять все но только к последнему комменту
   - if is_this_the_last?(comment)
     = link_to fa_icon('reply'), new_post_comment_path(comment.post)
     '
-  / коммент может редактировать только автор и то если это последний комментарий
-  - if owner_of?(comment) && is_this_the_last?(comment)
-    = link_to fa_icon('pencil'), edit_post_comment_path(comment.post, comment)
-    '
-  / Коммент удалить может author если он последний и юзер всегда
-  - if (owner_of?(comment) && is_this_the_last?(comment)) || comment.post.user == current_user
-    = link_to fa_icon('trash-o'), post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Вы уверены что хотите удалить ответ?' }
-    '
-
-  - comment.hashtags.distinct.pluck(:tag).each do |hashtag|
-    = link_to hashtag, hashtag_posts_path(hashtag)
-    '
+  -if current_user
+    / коммент может редактировать только автор и то если это последний комментарий
+    - if owner_of?(comment) && is_this_the_last?(comment)
+      = link_to fa_icon('pencil'), edit_post_comment_path(comment.post, comment)
+      '
+    / Коммент удалить может author если он последний и юзер всегда
+    - if (owner_of?(comment) && is_this_the_last?(comment)) || comment.post.user == current_user
+      = link_to fa_icon('trash-o'), post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Вы уверены что хотите удалить ответ?' }
+      '

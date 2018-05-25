@@ -22,4 +22,8 @@ class Anonymous
   def id
     nil
   end
+
+  def null_object?
+    true
+  end
 end

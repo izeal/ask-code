@@ -68,5 +68,9 @@ class User < ApplicationRecord
       )
     end
   end
+
+  def null_object?
+    false
+  end
 end
 

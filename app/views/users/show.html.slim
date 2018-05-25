@@ -25,6 +25,8 @@ h2.title-small.buffer-both
         = f.label "#{t('show.question_for')} @#{@user.login}", class: 'form-label'
         = f.text_area :text, class: 'form-textarea'
 
+      = recaptcha_tags unless current_user
+
       .form-action
         = submit_tag t('show.ask'), class: 'button button-small button-dark'
 

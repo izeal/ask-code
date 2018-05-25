@@ -6,6 +6,8 @@
       = f.label :text, class: 'form-label'
       = f.text_area :text, class: 'form-textarea'
 
+    = recaptcha_tags unless current_user
+
     .form-action.buffer-both
       = f.submit t('post.save'), class: 'button button-dark button-small'
       = " #{t('post.or')} "
